@@ -160,7 +160,7 @@ END
 
 
 
-
+exec ConsultarClientes
 
 
 
@@ -201,7 +201,6 @@ END
 
 
 ---------Procedimiento Consultar Venta---------
-
 Create procedure ConsultarVenta(@codigo int)
 AS
 BEGIN
@@ -239,4 +238,14 @@ AS
 BEGIN
 delete from factura.Venta where idCliente = @codigoCliente 
 end
+
+
+---datos ingresar---
+exec IngresarCliente 1208,'Hector','Osorio','Marcala, La Paz'
+exec IngresarCliente 2356,'Pedro','Infante','D.F Mexico, Mexico'
+exec IngresarCliente 1456,'Charles','Chaplin','Estados Unidos, California'
+
+exec IngresarProducto 3265,'bubaloes','Chicles de diferentes sabores'
+exec IngresarProducto 1257,'cheetos','Churros de diferentes sabores'
+exec IngresarProducto 9685,'Coca cola 3 lts.','Refresco de soda'
 

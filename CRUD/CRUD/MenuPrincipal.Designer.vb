@@ -37,6 +37,7 @@ Partial Class MenuPrincipal
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.TimerOcultarMenu = New System.Windows.Forms.Timer(Me.components)
         Me.timerMostrarMenu = New System.Windows.Forms.Timer(Me.components)
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.PanelSuperior.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMenu, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -175,6 +176,7 @@ Partial Class MenuPrincipal
         'PanelFormularios
         '
         Me.PanelFormularios.BackColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.PanelFormularios.Controls.Add(Me.Label3)
         Me.PanelFormularios.Controls.Add(Me.Label2)
         Me.PanelFormularios.Controls.Add(Me.PictureBox1)
         Me.PanelFormularios.Dock = System.Windows.Forms.DockStyle.Fill
@@ -187,7 +189,7 @@ Partial Class MenuPrincipal
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Bauhaus 93", 48.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(154, 101)
+        Me.Label2.Location = New System.Drawing.Point(127, 107)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(599, 182)
         Me.Label2.TabIndex = 4
@@ -196,7 +198,7 @@ Partial Class MenuPrincipal
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.CRUD.My.Resources.Resources.Logo_Messi
-        Me.PictureBox1.Location = New System.Drawing.Point(759, 412)
+        Me.PictureBox1.Location = New System.Drawing.Point(771, 412)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(217, 229)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -208,6 +210,15 @@ Partial Class MenuPrincipal
         '
         'timerMostrarMenu
         '
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(18, 662)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(341, 17)
+        Me.Label3.TabIndex = 5
+        Me.Label3.Text = "Hector Eduaro Osorio Castellanos 1208-2001-00571"
         '
         'MenuPrincipal
         '
@@ -246,4 +257,5 @@ Partial Class MenuPrincipal
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents Label2 As Label
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Label3 As Label
 End Class
