@@ -74,17 +74,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="conexion.vb" />
-    <Compile Include="CRUD.vb">
+    <Compile Include="Crud_Productos.Designer.vb">
+      <DependentUpon>Crud_Productos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Crud_Productos.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CRUD.Designer.vb">
-      <DependentUpon>CRUD.vb</DependentUpon>
+    <Compile Include="CRUD_Ventas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CRUD_Ventas.Designer.vb">
+      <DependentUpon>CRUD_Ventas.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuPrincipal.Designer.vb">
+      <DependentUpon>MenuPrincipal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MenuPrincipal.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -96,16 +109,31 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="RegistrarCliente.Designer.vb">
+      <DependentUpon>RegistrarCliente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrarCliente.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CRUD.resx">
-      <DependentUpon>CRUD.vb</DependentUpon>
+    <EmbeddedResource Include="Crud_Productos.resx">
+      <DependentUpon>Crud_Productos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CRUD_Ventas.resx">
+      <DependentUpon>CRUD_Ventas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuPrincipal.resx">
+      <DependentUpon>MenuPrincipal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistrarCliente.resx">
+      <DependentUpon>RegistrarCliente.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +147,48 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu_100px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reception_160px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reception_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_shopping_cart_200px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paid_96px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sell_96px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sell_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\product_100px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trolley_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_window_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_window_100px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\esfsfsdff-1524733276962.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Messi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo Messi.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

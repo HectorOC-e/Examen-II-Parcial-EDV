@@ -1,15 +1,17 @@
 drop database Tienda 
+
 create database Tienda
+go
+
+use Tienda 
 go
 
 create schema factura
 go
 
-use tienda 
-go
 
 create table factura.cliente (
-	idCliente int primary key not null,
+	id int primary key not null,
 	nombre varchar(25),
 	apellido varchar(25),
 	direccion varchar(50),
@@ -17,7 +19,7 @@ create table factura.cliente (
 
 
 create table factura.producto(
-	idProducto int primary key not null,
+	idProd int primary key not null,
 	nombreProducto varchar(40),
 	descripcion varchar(50)
 )
@@ -27,42 +29,147 @@ create table factura.Venta(
 	fechaVenta date,
 	precio int,
 	cantidad int,
-	idCliente int foreign key references factura.cliente(idCliente),
-	idProducto int foreign key references factura.producto(idProducto)
+	idCliente int foreign key references factura.Cliente(id),
+	idProducto int foreign key references factura.producto(idProd)
 )
 
---procedimiento agregar cliente--
+
+
+
+-----------------------Procedimiento para Clientes---------------------
+---------procedimiento agregar cliente---------------
 Create procedure IngresarCliente(
-@idCliente int,
+@id int,
 @nombre varchar(25),
 @apellido varchar(25),
 @direccion varchar(50)
 )
 AS
 BEGIN
-insert into factura.cliente(idCliente, nombre, apellido, direccion)
-values(@idCliente,@nombre,@apellido,@direccion)
+insert into factura.cliente(id, nombre, apellido, direccion)
+values(@id,@nombre,@apellido,@direccion)
 END
 
-exec IngresarCliente 1208, 'Hector', 'Osorio','Barrio la tejera'
-select * from factura.cliente 
 
---Procedimiento agregar producto--
+-----------Procedimiento Consultar Clientes-------------
+CREATE PROCEDURE ConsultarClientes
+AS
+BEGIN
+select id as 'Codigo Cliente', concat(nombre,' ',apellido) as 'Nombre Completo', direccion  from factura.cliente 
+END
+
+
+
+------------Procedimiento Buscar Cliente---------------
+Create PROCEDURE BuscarCliente(@codigo int)
+AS
+BEGIN
+select id as 'Codigo Cliente', concat(nombre,' ',apellido) as 'Nombre Completo', direccion   from factura.cliente where id = @codigo
+END
+
+
+
+------------Procedimiento Actualizar Cliente---------------
+CREATE PROCEDURE ActualizarCliente(
+@codigo int,
+@nombre varchar(25),
+@apellido varchar(25),
+@direccion varchar(50)
+)
+AS
+BEGIN
+update factura.cliente 
+set nombre = @nombre, apellido = @apellido, direccion = @direccion
+where id = @codigo
+END
+
+
+
+---------Procedimiento para eliminar cliente------
+CREATE PROCEDURE eliminarCliente(@codigo int)
+AS
+BEGIN
+delete from factura.Venta where idCliente = @codigo
+delete from factura.cliente where id = @codigo
+END
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------Procedimientos para Productos---------------
+-------Procedimiento agregar producto---------
 Create procedure IngresarProducto(
-@idProducto int,
+@idProd int,
 @nombreProducto varchar(40),
 @descripcion varchar(50)
 )
 AS
 BEGIN
-insert into factura.producto(idProducto, nombreProducto,descripcion)
-values(@idProducto,@nombreProducto,@descripcion)
+insert into factura.producto(idProd, nombreProducto,descripcion)
+values(@idProd,@nombreProducto,@descripcion)
 END
 
-exec IngresarProducto 035, 'Coca Cola 3 lts.', 'Refresco de soda'
-select * from factura.producto
 
---procedimiento Ingresar Venta--
+
+-------Procedimiento actualizar producto---------
+CREATE PROCEDURE ActualizarProducto(
+	@idProd int,
+	@nombreProducto varchar(40),
+	@descripcion varchar(50)
+)
+AS
+BEGIN
+update factura.producto
+set nombreProducto = @nombreProducto , descripcion = @descripcion
+where idProd = @idProd
+END
+
+
+-------Procedimiento consultar productos---------
+CREATE PROCEDURE ConsultarProductos
+AS
+BEGIN
+select * from factura.producto
+END
+
+
+-------Procedimiento buscar producto---------
+CREATE PROCEDURE BuscarProductos(@codigo as int)
+AS
+BEGIN
+select * from factura.producto where idProd = @codigo
+END
+
+
+-------Procedimiento Eliminar Producto---------
+CREATE PROCEDURE eliminarProducto(@codigoProducto int)
+AS
+BEGIN
+delete from factura.Venta where idProducto = @codigoProducto
+delete from factura.producto where idProd = @codigoProducto
+END
+
+
+
+
+
+
+
+
+
+
+-----------------PROCEDIMIENTOS PARA VENTA----------------
+
+---------procedimiento Ingresar Venta---------
 create procedure Ingresarventa(
 @idVenta int,
 @fechaVenta date,
@@ -77,33 +184,39 @@ insert into factura.Venta(idVenta,fechaVenta,precio,cantidad,idCliente,idProduct
 values(@idVenta,@fechaVenta,@precio,@cantidad,@idcliente,@idproducto)
 END
 
-exec Ingresarventa 1,'2020-07-07', 48, 3, 1208, 035
-select * from factura.Venta
 
---procedimiento consulta productos--
+
+---------Procedimiento Consultar Base de ventas---------
 create procedure ConsultarBase
 AS
 BEGIN
-select C.nombre, C.apellido, P.nombreProducto, cantidad, precio, fechaVenta from factura.Venta V
+select C.id as codigoCliente,concat(C.nombre, ' ', C.apellido) as NombreCliente, P.idProd as CodigoProducto, P.nombreProducto, cantidad, precio, fechaVenta from factura.Venta V
 inner join factura.cliente C
-on V.idCliente = C.idCliente
+on V.idCliente = C.id 
 inner join factura.producto P
-on V.idProducto = P.idProducto
+on V.idProducto = P.idProd
 END
 
-exec ConsultarBase
 
-Create procedure ConsultarVenta(@Nombre varchar (25))
+
+
+---------Procedimiento Consultar Venta---------
+
+Create procedure ConsultarVenta(@codigo int)
 AS
 BEGIN
-select C.nombre, C.apellido, P.nombreProducto, cantidad, precio, fechaVenta from factura.Venta V
+select C.id as codigoCliente,concat(C.nombre, ' ', C.apellido) as NombreCliente, P.idProd as CodigoProducto, P.nombreProducto, cantidad, precio, fechaVenta from factura.Venta V
 inner join factura.cliente C
-on V.idCliente = C.idCliente
+on V.idCliente = C.id
 inner join factura.producto P
-on V.idProducto = P.idProducto
-where nombre = @nombre
+on V.idProducto = P.idProd
+where idCliente = @codigo 
 END
 
+
+
+
+---------Procedimiento Modificar Venta---------
 create procedure ModificarVenta(
 @fechaVenta date,
 @precio int,
@@ -114,5 +227,16 @@ create procedure ModificarVenta(
 AS
 BEGIN
 update factura.Venta 
-set  
+set  idProducto=@idproducto , precio = @precio, cantidad = @cantidad, fechaVenta = @fechaVenta
+where idCliente = @idcliente
 END
+
+
+
+---------Procedimiento Eliminar Venta---------
+CREATE PROCEDURE EliminarVenta(@codigoCliente int)
+AS
+BEGIN
+delete from factura.Venta where idCliente = @codigoCliente 
+end
+
