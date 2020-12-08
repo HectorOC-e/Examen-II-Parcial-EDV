@@ -2,7 +2,7 @@ drop database Tienda
 
 create database Tienda
 go
-
+/*asd*/
 use Tienda 
 go
 
